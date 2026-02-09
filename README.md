@@ -19,7 +19,7 @@ RoomiAI is an intelligent AI-powered voice agent designed to handle hotel room r
 - [Project Structure](#-project-structure)
 - [Technology Stack](#-technology-stack)
 - [File Descriptions](#-file-descriptions)
-- [Installation & Setup](#-installation--setup)
+- [Installation &amp; Setup](#-installation--setup)
 - [Environment Variables](#-environment-variables)
 - [API Endpoints](#-api-endpoints)
 - [How It Works](#-how-it-works)
@@ -147,17 +147,17 @@ FYP-Agent/
 
 ## 🛠️ Technology Stack
 
-| Component | Technology | Purpose |
-|-----------|------------|---------|
-| **Runtime** | Python 3.11+ | Core application language |
-| **Voice Agent** | LiveKit Agents SDK | Real-time voice interaction |
-| **Speech-to-Text** | Deepgram Nova-2 | Voice transcription |
-| **Text-to-Speech** | Deepgram Aura | Voice synthesis |
-| **LLM** | Groq (LLaMA 3.3 70B) | Natural language understanding |
-| **Backend** | FastAPI | REST API server |
-| **Database** | MongoDB Atlas | Data persistence |
-| **Async Driver** | Motor | Async MongoDB operations |
-| **VAD** | Silero | Voice Activity Detection |
+| Component                | Technology           | Purpose                        |
+| ------------------------ | -------------------- | ------------------------------ |
+| **Runtime**        | Python 3.11+         | Core application language      |
+| **Voice Agent**    | LiveKit Agents SDK   | Real-time voice interaction    |
+| **Speech-to-Text** | Deepgram Nova-2      | Voice transcription            |
+| **Text-to-Speech** | Deepgram Aura        | Voice synthesis                |
+| **LLM**            | Groq (LLaMA 3.3 70B) | Natural language understanding |
+| **Backend**        | FastAPI              | REST API server                |
+| **Database**       | MongoDB Atlas        | Data persistence               |
+| **Async Driver**   | Motor                | Async MongoDB operations       |
+| **VAD**            | Silero               | Voice Activity Detection       |
 
 ---
 
@@ -165,49 +165,50 @@ FYP-Agent/
 
 ### Root Files
 
-| File | Description |
-|------|-------------|
-| `app.py` | **Main Voice Agent** - Contains the `HotelAssistant` class with all `@function_tool` decorated methods for voice interactions. Initializes LiveKit session with Deepgram STT/TTS and Groq LLM. |
-| `.env` | **Environment Configuration** - Stores API keys for LiveKit, MongoDB, Groq, and Deepgram. |
-| `.gitignore` | Git ignore rules for `.env` and virtual environment |
+| File           | Description                                                                                                                                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app.py`     | **Main Voice Agent** - Contains the `HotelAssistant` class with all `@function_tool` decorated methods for voice interactions. Initializes LiveKit session with Deepgram STT/TTS and Groq LLM. |
+| `.env`       | **Environment Configuration** - Stores API keys for LiveKit, MongoDB, Groq, and Deepgram.                                                                                                          |
+| `.gitignore` | Git ignore rules for `.env` and virtual environment                                                                                                                                                    |
 
 ### Backend - Database Layer (`backend/database/`)
 
-| File | Description |
-|------|-------------|
+| File              | Description                                                                                                                                                                                                                             |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `connection.py` | **MongoDB Connection Manager** - Async connection using Motor driver. Provides `connect_to_mongodb()`, `close_mongodb_connection()`, and collection getters (`get_bookings_collection()`, `get_rooms_collection()`, etc.) |
-| `schemas.py` | Database schema placeholder definitions |
+| `schemas.py`    | Database schema placeholder definitions                                                                                                                                                                                                 |
 
 ### Backend - Models (`backend/models/`)
 
-| File | Description |
-|------|-------------|
+| File           | Description                                                                                                                                                                                                 |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `booking.py` | **Booking Pydantic Models** - Includes `BookingCreate`, `BookingResponse`, `BookingInDB`, `CancelBookingRequest`, `CancelBookingResponse`, and enums for `RoomType` and `BookingStatus` |
-| `room.py` | Room type model definitions |
-| `guest.py` | Guest data models (`GuestCreate`, `GuestResponse`) |
-| `service.py` | Service request models |
+| `room.py`    | Room type model definitions                                                                                                                                                                                 |
+| `guest.py`   | Guest data models (`GuestCreate`, `GuestResponse`)                                                                                                                                                      |
+| `service.py` | Service request models                                                                                                                                                                                      |
 
 ### Backend - Routers (`backend/routers/`)
 
-| File | Description |
-|------|-------------|
-| `booking.py` | **Booking API Endpoints** - `POST /bookings` (create), `GET /bookings/{id}` (retrieve), `DELETE /bookings/{id}` (cancel), `GET /bookings/search/by-name` (search) |
-| `rooms.py` | **Room API Endpoints** - `GET /rooms/types` (list room types), `GET /rooms/availability` (check availability), `GET /rooms/info` (hotel information) |
-| `guests.py` | Guest management endpoints |
-| `services.py` | Service request endpoints |
+| File            | Description                                                                                                                                                                     |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `booking.py`  | **Booking API Endpoints** - `POST /bookings` (create), `GET /bookings/{id}` (retrieve), `DELETE /bookings/{id}` (cancel), `GET /bookings/search/by-name` (search) |
+| `rooms.py`    | **Room API Endpoints** - `GET /rooms/types` (list room types), `GET /rooms/availability` (check availability), `GET /rooms/info` (hotel information)                |
+| `guests.py`   | Guest management endpoints                                                                                                                                                      |
+| `services.py` | Service request endpoints                                                                                                                                                       |
 
 ### Backend - Tools (`backend/tools/`)
 
-| File | Description |
-|------|-------------|
+| File                 | Description                                                                                                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `booking_tools.py` | **Booking Business Logic** - Functions called by voice agent: `check_room_availability()`, `create_room_booking()`, `get_booking_details()`, `cancel_room_booking()`. Includes fallback logic when API is unavailable. |
-| `room_tools.py` | **Room Business Logic** - `get_all_room_types()`, `get_hotel_information()`. Contains fallback data for offline operation. |
-| `guest_tools.py` | Guest management functions |
-| `service_tools.py` | Service request functions |
+| `room_tools.py`    | **Room Business Logic** - `get_all_room_types()`, `get_hotel_information()`. Contains fallback data for offline operation.                                                                                                 |
+| `guest_tools.py`   | Guest management functions                                                                                                                                                                                                           |
+| `service_tools.py` | Service request functions                                                                                                                                                                                                            |
 
 ### Backend - Main Entry (`backend/main.py`)
 
 **FastAPI Application** with:
+
 - CORS middleware configured
 - Lifespan handler for MongoDB connection management
 - Routers included at `/api/v1` prefix
@@ -216,11 +217,11 @@ FYP-Agent/
 
 ### Documentation Files
 
-| File | Description |
-|------|-------------|
+| File                                  | Description                                                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `RoomiAI_Technical_Architecture.md` | Complete technical architecture including MongoDB schemas, API endpoint specifications, system integration details |
-| `RoomiAI_Conversation_Flow.md` | Full conversation scripts covering all reservation scenarios, edge cases, and error handling |
-| `RoomiAI_Core_Conversation.md` | Core booking flow with phase-by-phase breakdown, sample hotel data, and implementation priorities |
+| `RoomiAI_Conversation_Flow.md`      | Full conversation scripts covering all reservation scenarios, edge cases, and error handling                       |
+| `RoomiAI_Core_Conversation.md`      | Core booking flow with phase-by-phase breakdown, sample hotel data, and implementation priorities                  |
 
 ---
 
@@ -296,16 +297,16 @@ python app.py dev
 
 ## 🔐 Environment Variables
 
-| Variable | Description |
-|----------|-------------|
-| `LIVEKIT_URL` | LiveKit Cloud WebSocket URL |
-| `LIVEKIT_API_KEY` | LiveKit API Key |
-| `LIVEKIT_API_SECRET` | LiveKit API Secret |
-| `MONGODB_URL` | MongoDB Atlas connection string |
-| `DB_NAME` | MongoDB database name |
-| `API_BASE_URL` | FastAPI backend URL |
-| `GROQ_API_KEY` | Groq API key for LLM |
-| `DEEPGRAM_API_KEY` | Deepgram API key for STT/TTS |
+| Variable               | Description                     |
+| ---------------------- | ------------------------------- |
+| `LIVEKIT_URL`        | LiveKit Cloud WebSocket URL     |
+| `LIVEKIT_API_KEY`    | LiveKit API Key                 |
+| `LIVEKIT_API_SECRET` | LiveKit API Secret              |
+| `MONGODB_URL`        | MongoDB Atlas connection string |
+| `DB_NAME`            | MongoDB database name           |
+| `API_BASE_URL`       | FastAPI backend URL             |
+| `GROQ_API_KEY`       | Groq API key for LLM            |
+| `DEEPGRAM_API_KEY`   | Deepgram API key for STT/TTS    |
 
 ---
 
@@ -313,28 +314,28 @@ python app.py dev
 
 ### Bookings
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/v1/bookings/` | Create a new reservation |
-| `GET` | `/api/v1/bookings/{confirmation_number}` | Get booking details |
-| `GET` | `/api/v1/bookings/search/by-name` | Search by guest name |
-| `GET` | `/api/v1/bookings/` | List all bookings |
-| `DELETE` | `/api/v1/bookings/{confirmation_number}` | Cancel a booking |
+| Method     | Endpoint                                   | Description              |
+| ---------- | ------------------------------------------ | ------------------------ |
+| `POST`   | `/api/v1/bookings/`                      | Create a new reservation |
+| `GET`    | `/api/v1/bookings/{confirmation_number}` | Get booking details      |
+| `GET`    | `/api/v1/bookings/search/by-name`        | Search by guest name     |
+| `GET`    | `/api/v1/bookings/`                      | List all bookings        |
+| `DELETE` | `/api/v1/bookings/{confirmation_number}` | Cancel a booking         |
 
 ### Rooms
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/v1/rooms/types` | Get all room types |
+| Method  | Endpoint                       | Description             |
+| ------- | ------------------------------ | ----------------------- |
+| `GET` | `/api/v1/rooms/types`        | Get all room types      |
 | `GET` | `/api/v1/rooms/availability` | Check room availability |
-| `GET` | `/api/v1/rooms/info` | Get hotel information |
+| `GET` | `/api/v1/rooms/info`         | Get hotel information   |
 
 ### Health
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/health` | Health check |
-| `GET` | `/` | API welcome message |
+| Method  | Endpoint    | Description         |
+| ------- | ----------- | ------------------- |
+| `GET` | `/health` | Health check        |
+| `GET` | `/`       | API welcome message |
 
 ---
 
@@ -355,14 +356,14 @@ python app.py dev
 
 The `HotelAssistant` class in `app.py` includes these tools:
 
-| Tool | Function | Description |
-|------|----------|-------------|
-| `check_availability` | `check_room_availability()` | Check room availability for dates |
-| `create_booking` | `create_room_booking()` | Create a new reservation |
-| `get_room_types` | `get_all_room_types()` | Get available room types and prices |
-| `get_hotel_info` | `get_hotel_information()` | Get hotel policies and information |
-| `get_booking` | `get_booking_details()` | Retrieve existing booking |
-| `cancel_booking` | `cancel_room_booking()` | Cancel a reservation |
+| Tool                   | Function                      | Description                         |
+| ---------------------- | ----------------------------- | ----------------------------------- |
+| `check_availability` | `check_room_availability()` | Check room availability for dates   |
+| `create_booking`     | `create_room_booking()`     | Create a new reservation            |
+| `get_room_types`     | `get_all_room_types()`      | Get available room types and prices |
+| `get_hotel_info`     | `get_hotel_information()`   | Get hotel policies and information  |
+| `get_booking`        | `get_booking_details()`     | Retrieve existing booking           |
+| `cancel_booking`     | `cancel_room_booking()`     | Cancel a reservation                |
 
 ---
 
@@ -380,11 +381,6 @@ Detailed documentation is available in the repository:
 
 **Usama Masood**
 
----
-
-## 📄 License
-
-This project is part of a Final Year Project (FYP) at UMT.
 
 ---
 
